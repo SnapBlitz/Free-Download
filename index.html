@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adopt Photoshop Downloads</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0d0d0d;
+      overflow: hidden;
+      color: #f0f0f0;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100vh;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 2rem;
+      color: #e0e0e0;
+      animation: float 5s ease-in-out infinite, shimmer 4s linear infinite;
+      background: linear-gradient(to right, #888, #fff, #888);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -500px; }
+      100% { background-position: 500px; }
+    }
+
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #f5c51833;
+      color: #f0f0f0;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, #f5c51833, transparent);
+      transform: skewX(-20deg);
+      transition: all 0.5s ease;
+    }
+
+    .btn:hover {
+      border-color: #f5c518cc;
+      color: #fffbea;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn:hover::before {
+      left: 130%;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .btn {
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bgCanvas"></canvas>
+  <div class="container">
+    <h1>Adopt Photoshop Free Download</h1>
+    <div class="btn-container">
+      <a class="btn" href="#" target="_blank">Adobe Photoshop 2020</a>
+      <a class="btn" href="#" target="_blank">Adobe Photoshop 2021</a>
+      <a class="btn" href="#" target="_blank">Adobe Photoshop 2022</a>
+      <a class="btn" href="#" target="_blank">Adobe Photoshop 2025</a>
+    </div>
+  </div>
+  <script>
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    let snakes = [];
+    const snakeCount = 8;
+    const snakeLength = 20;
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    class Snake {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = -Math.random() * width;
+        this.y = Math.random() * height;
+        this.length = snakeLength;
+        this.size = 4 + Math.random() * 3;
+        this.speed = 1 + Math.random() * 2;
+        this.color = `hsl(${Math.random() * 360}, 60%, 70%)`;
+        this.segments = [];
+        for (let i = 0; i < this.length; i++) {
+          this.segments.push({ x: this.x - i * this.size * 2, y: this.y });
+        }
+      }
+
+      update() {
+        const head = this.segments[0];
+        const newHead = { x: head.x + this.speed, y: head.y + Math.sin(head.x / 20) * 1.5 };
+        this.segments.unshift(newHead);
+        if (this.segments.length > this.length) this.segments.pop();
+
+        if (newHead.x > width + 50) this.reset();
+      }
+
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = this.size;
+        ctx.lineJoin = "round";
+        ctx.moveTo(this.segments[0].x, this.segments[0].y);
+        for (let i = 1; i < this.segments.length; i++) {
+          ctx.lineTo(this.segments[i].x, this.segments[i].y);
+        }
+        ctx.stroke();
+      }
+    }
+
+    for (let i = 0; i < snakeCount; i++) {
+      snakes.push(new Snake());
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      snakes.forEach(snake => {
+        snake.update();
+        snake.draw(ctx);
+      });
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    draw();
+  </script>
+</body>
+</html>
