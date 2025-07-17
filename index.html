@@ -41,7 +41,6 @@
       font-size: 2.8rem;
       font-weight: 800;
       margin-bottom: 2rem;
-      color: #e0e0e0;
       animation: float 5s ease-in-out infinite, shimmer 4s linear infinite;
       background: linear-gradient(to right, #888, #fff, #888);
       -webkit-background-clip: text;
@@ -105,6 +104,18 @@
       left: 130%;
     }
 
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.3);
+      animation: float 4s ease-in-out infinite;
+      user-select: none;
+      pointer-events: none;
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 1.8rem;
@@ -120,7 +131,7 @@
 <body>
   <canvas id="bgCanvas"></canvas>
   <div class="container">
-    <h1>Adopt Photoshop Free Download</h1>
+    <h1>Adobe Photoshop Downloads</h1>
     <div class="btn-container">
       <a class="btn" href="#" target="_blank">Adobe Photoshop 2020</a>
       <a class="btn" href="#" target="_blank">Adobe Photoshop 2021</a>
@@ -128,6 +139,8 @@
       <a class="btn" href="#" target="_blank">Adobe Photoshop 2025</a>
     </div>
   </div>
+  <div class="footer">Powered by SnapBlitz</div>
+
   <script>
     const canvas = document.getElementById('bgCanvas');
     const ctx = canvas.getContext('2d');
